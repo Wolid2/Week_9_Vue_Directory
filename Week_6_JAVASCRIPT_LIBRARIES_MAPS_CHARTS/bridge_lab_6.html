@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaflet Bridge Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  <style>
+    #BridgeMap {
+      height: 500px; width: 100%
+
+
+    }
+
+  </style>
+</head>
+<body>
+<div id="BridgeMap"></div>
+<script>
+  let bridgeCoordinates = [40.5, -95.0];
+  let zoomLevel = 4;
+
+  // Initializing the map location and zoom level
+  let map = L.map('BridgeMap').setView(bridgeCoordinates, zoomLevel);
+
+  // Adding a tile layer from OpenStreetMap
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  // Creating an array for the bridges
+  let bridges = [
+    {name: "ForestHill", span: 1298, coordinates: [40.6066,-73.9898]},
+    {name: "Royal Gorge", span: 1121, coordinates: [39.9659, -100.9898]},
+    {name: "Manchac", span: 1708, coordinates: [45.9898, -84.9898]},
+    {name: "New River", span: 1654, coordinates: [41.8517, -81.7278]},
+    {name: "Golden Gate", span: 280, coordinates: [37.8199,-121.5517]},
+  ];
+
+  // Finding  the longest bridge
+   let longestBridge = bridges.reduce((max, bridge) => bridge.span > max.span ? bridge : max, bridges[0]);
+
+  // Defining  bridge icons
+  let bridgeIcon = L.icon({
+    iconUrl: 'bridge.png',
+
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40]
+  });
+
+  let longestBridgeIcon = L.icon({
+    iconUrl: 'bridge.png',
+    iconSize: [50, 50], // Larger icon for the longest bridge
+    iconAnchor: [25, 50],
+    popupAnchor: [0, -50]
+  });
+
+  // Loop through each bridge and create markers
+  bridges.forEach(function(bridge) {
+    L.marker(bridge.coordinates, { icon: bridge.name === longestBridge.name ? longestBridgeIcon : bridgeIcon })
+            .addTo(map)
+            .bindPopup(`<b>${bridge.name}</b><br>Span: ${bridge.span} m`);
+  });
+</script>
+</body>
+</html>
