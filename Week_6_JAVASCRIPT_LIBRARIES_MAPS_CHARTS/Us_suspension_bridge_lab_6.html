@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Longest US Suspension Bridges Chart</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body class="p-5">
+
+<h1 class="text-center">Longest US Suspension Bridges</h1>
+
+<canvas id="bridge-span-chart" width="600" height="400"></canvas>
+
+<script>
+  // adding a Dataset for the  Longest US Suspension Bridges
+  let bridgesData = [
+    { name: 'Verrazzano-Narrows Bridge', span: 1298.4 },
+    { name: 'Golden Gate Bridge', span: 1280.2 },
+    { name: 'Mackinac Bridge', span: 1158.0 },
+    { name: 'George Washington Bridge', span: 1067.0 },
+    { name: 'Tacoma Narrows Bridge', span: 853.44 }
+  ];
+
+  //   bridge names and spans for the chart
+  let bridgeNames = bridgesData.map(bridge => bridge.name);
+  let bridgeSpans = bridgesData.map(bridge => bridge.span);
+
+
+  let ctx = document.getElementById('bridge-span-chart').getContext('2d');
+  let bridgeChart = new Chart(ctx, {
+    type: 'bar', // Set chart type to 'bar'
+    data: {
+      labels: bridgeNames, // Labels are the bridge names
+      datasets: [{
+        label: 'Span Length (meters)', // Label for the data
+        data: bridgeSpans, // Data is the array of span lengths
+        backgroundColor: ['red','blue','green','purple' ,'yellow'],// Set a single color for bars
+        borderColor: ['red','blue','green','purple' ,'yellow'], // Border color for bars
+        borderWidth: 1 // Set border width
+      }]
+    },
+    options: {
+      // it will make the chart responsive
+      responsive: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+
+
+          }
+        }]
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
