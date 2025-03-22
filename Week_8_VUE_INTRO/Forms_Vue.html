@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Vue Forms</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<!-- adding a Vue app-->
+<div id="app">
+<!-- adding a input field to bind to a name variable-->
+    <label>Please Enter your name:</label>
+    <input v-model="name">
+<!-- Adding a conditional ti will show the difference message on input   -->
+    <p v-if="name">Thanks,your name is {{name}}</p>
+    <p v-else>Awaiting user input</p>
+
+<!--Adding a button to clear the input field-->
+    <button v-on:click="clearName">Clear Name</button>
+</div>
+
+
+<script>
+//Adding a Vue method
+    const{createApp, ref } = Vue
+
+    createApp({
+        setup(){
+
+            const name = ref('')
+
+            // adding a function to clear the input field
+            function clearName(){
+                name.value = ''
+            }
+
+
+          return {
+              name,
+              clearName
+          }
+
+        }
+    }).mount('#app')
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

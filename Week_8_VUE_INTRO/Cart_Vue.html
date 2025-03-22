@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Vue Forms</title>
+<!-- importing a Vue-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<!-- adding a style for the table cell-->
+    <style>
+        th, td{
+            width: 25%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!--Adding a vue app-->
+ <div id="app">
+<!--Adding a table header for the cart-->
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+
+        <tr>
+            <td>{{name}}</td>
+            <td>{{unitPrice}}</td>
+            <td><input type="number" v-model="quantity"></td>
+            <td>{{total}}</td>
+        </tr>
+    </table>
+
+</div>
+
+
+
+    <script>
+
+        const{createApp, ref, computed } = Vue
+        //  adding a state Variables
+        createApp({
+            setup(){
+            // defining a reactive variables
+            const name = ref('Hat')
+            const quantity = ref(1)
+            const unitPrice = ref(4.99)
+
+
+            // adding a computed property to calculate the total price
+            const total = computed(function(){
+                const totalPrice = quantity.value *  unitPrice.value
+                //  it will return in  format to 2 decimal
+                const formattedPrice = totalPrice.toFixed(2)
+                return formattedPrice
+            })
+
+
+                return {
+                name,
+                quantity,
+                unitPrice,
+                total
+                }
+
+            }
+        }).mount('#app')
+
+
+    </script>
+
+
+
+
+
+</body>
+</html>
+
