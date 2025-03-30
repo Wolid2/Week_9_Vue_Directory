@@ -1,0 +1,4 @@
+Student signed in and Student club roster have difference in design and structures.
+the student signed have more structured and also has form validation  and error  handling.
+and also it gives welcome messages when student arrive or leave.
+Between the two i prefer the student signed in due to its structured.
