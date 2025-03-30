@@ -1,0 +1,21 @@
+/*adding the height of the student table*/
+#student-table {
+    max-height: 400px;
+    overflow: scroll;
+}
+/*setting the width of the table*/
+th, tr {
+    width: 25%;
+}
+/*adding the style of the present*/
+.present {
+    color: gray;
+    font-style: italic;
+}
+/*adding the style of the absent*/
+.absent {
+    color: black;
+    font-weight: bold;
+}
+
+
